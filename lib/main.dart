@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task/views/crud_home_page.dart';
 import 'package:task/views/firstpage.dart';
 
 void main() async{
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-     home: Firstpage(),
+     home: CrudHomePage(),
     );
   }
 }

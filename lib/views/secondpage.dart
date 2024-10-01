@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task/controller/count_controller.dart';
+import 'package:task/views/crud_home_page.dart';
 
 class Secondpage extends StatelessWidget {
   final CountController ctrl = Get.put(CountController());
   Secondpage({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,16 @@ class Secondpage extends StatelessWidget {
                   ctrl.decrement();
                 },
                 child: const Text('decrement')),
-            
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => CrudHomePage(),
+          ));
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
