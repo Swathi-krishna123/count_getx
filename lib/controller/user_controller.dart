@@ -10,18 +10,19 @@ class UserController extends GetxController {
   final TextEditingController phoneController = TextEditingController();
 
   var users = <Usermodel>[].obs;
+  var currentId=0.obs;
   void adduser() {
+    currentId.value++;
     try {
       final userdata = Usermodel(
         name: nameController.text,
         address: addressController.text,
         age: int.parse(ageController.text),
         phone: int.parse(phoneController.text),
+        id: currentId.value
       );
-      if (userdata != null) {
-        users.add(userdata);
-      }
-    } catch (e) {
+      users.insert(0,userdata);
+        } catch (e) {
       print(e);
     }
   }
@@ -37,19 +38,15 @@ class UserController extends GetxController {
     users.removeAt(index);
   }
 
-  void editUser(int index){
-   
-    try {
-      final updatedUser = Usermodel(
-        name: nameController.text,
-        address: addressController.text,
-        age: int.parse(ageController.text),
-        phone: int.parse(phoneController.text),
-      );
-      users[index] = updatedUser; 
-      clearUser();
-    } catch (e) {
-      print(e);
+ // Method to edit an existing user by ID
+  void editUser(Usermodel user) {
+    int index = users.indexWhere((u) => u.id == user.id);
+    
+    if (index != -1) {
+      users[index] = user;
+      Get.snackbar('Success', 'User updated successfully!', snackPosition: SnackPosition.BOTTOM);
+    } else {
+      Get.snackbar('Error', 'User not found!', snackPosition: SnackPosition.BOTTOM);
     }
   }
 
